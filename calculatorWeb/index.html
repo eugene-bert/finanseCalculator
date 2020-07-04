@@ -5,7 +5,7 @@
   <title>Calculator</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./plugins/papaparse.min.js"></script>
-  <script src="index.js"></script>
+  <script src="data.js"></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -16,39 +16,43 @@
           <h3>Калькулятор стоимости бухгалтерских услуг</h3>
           <p>Рассчитать стоимость услуг</p>
         </div>
-        <div class="calcBox-inputs">
-            <div class="calcBox-inputs__legalEntity">
-              <label for="legalEntity">Форма юридического лица</label>
+        <div class="calcBox-main">
+          <div class="calcBox-inputs">
+              <div class="calcBox-inputs__legalEntity">
+                <label for="legalEntity">Форма юридического лица</label>
 
-              <select name="legalEntity" id="legalEntity">
-                <option value="option1">ИП без сотрудников</option>
-                <option value="option2">ООО с 1 сотрудником</option>
-              </select>
-            </div>
-            <div class="calcBox-inputs__taxSystem">
-              <label for="taxSystem">Cистема налогообложения</label>
+                <select name="legalEntity" id="legalEntity">
+                  <option value="option1">ИП без сотрудников</option>
+                  <option value="option2">ООО с 1 сотрудником</option>
+                </select>
+              </div>
+              <div class="calcBox-inputs__taxSystem">
+                <label for="taxSystem">Cистема налогообложения</label>
 
-              <select name="taxSystem" id="taxSystem">
-                <option value="option1">ЕНВД</option>
-                <option value="option2">УСНО (ДОХОДЫ)</option>
-                <option value="option2">УСНО (ДОХОДЫ-РАСХОДЫ)</option>
-                <option value="option2">ОСНО</option>
-              </select>
-            </div>
-            <div class="calcBox-inputs__employeeNumber">
-                <label for="employeeNumber">Количество сотрудников (не считая ИП и директора)</label>
-                <input type="number" id="employeeNumber" name="employeeNumber" min="1" max="100">
-            </div>
-            <div class="calcBox-inputs__businessTransactions">
-                <label for="businessTransactions">Количество хозяйственных операций (акты и накладные входящие, исходящие)</label>
-                <input type="number" id="businessTransactions" name="businessTransactions">
-            </div>
-        </div>
-        <div class="calcBox-result">
-
+                <select name="taxSystem" id="taxSystem">
+                  <option value="option1">ЕНВД</option>
+                  <option value="option2">УСНО (ДОХОДЫ)</option>
+                  <option value="option3">УСНО (ДОХОДЫ-РАСХОДЫ)</option>
+                  <option value="option4">ОСНО</option>
+                </select>
+              </div>
+              <div class="calcBox-inputs__employeeNumber">
+                  <label for="employeeNumber">Количество сотрудников (не считая ИП и директора)</label>
+                  <input value="0" type="number" id="employeeNumber" name="employeeNumber" min="1" max="100">
+              </div>
+              <div class="calcBox-inputs__businessTransactions">
+                  <label for="businessTransactions">Количество хозяйственных операций (акты и накладные входящие, исходящие)</label>
+                  <input value="0" type="number" id="businessTransactions" name="businessTransactions">
+              </div>
+          </div>
+          <div class="calcBox-result">
+              <h1>Результат</h1>
+              <div id="target"></div>
+          </div>
         </div>
     </div>
 </div>
 
+<script src="index.js"></script>
 </body>
 </html>
