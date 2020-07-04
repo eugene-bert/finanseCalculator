@@ -1,3 +1,4 @@
-/node_modules/
+/serverEmulation/node_modules/
+/first_example/
 /.idea/
 /.git/
