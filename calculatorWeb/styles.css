@@ -1,0 +1,16 @@
+.page {
+    display: flex;
+    justify-content: center;
+}
+
+.calcBox {
+    padding: 50px;
+    border: 1px solid black;
+}
+
+.calcBox-inputs__legalEntity,
+.calcBox-inputs__taxSystem,
+.calcBox-inputs__employeeNumber,
+.calcBox-inputs__businessTransactions {
+    padding: 10px 0;
+}
