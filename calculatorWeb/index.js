@@ -1,18 +1,3 @@
-$( document ).ajaxComplete(function(){
-    console.log(dataResult)
-
-    let parameter3 = dataResult.data.map(data => data.option3),
-        parameter4 = dataResult.data.map(data => data.option4),
-        parameter5 = dataResult.data.map(data => data.option5),
-        parameter6 = dataResult.data.map(data => data.option6),
-        parameter7 = dataResult.data.map(data => data.option7),
-        parameter8 = dataResult.data.map(data => data.option8),
-        parameter9 = dataResult.data.map(data => data.option9)
-
-
-    console.log(parameter3)
-})
-
 //getInputsData
 function getBusinessTransactionsData() {
     $('#businessTransactions').keyup(function() {
@@ -48,4 +33,23 @@ getTaxSystem()
 
 getLegalEntity()
 
-//calculateData function
+//transformCsvData
+
+$( document ).ajaxComplete(function(){
+    console.log(dataResult)
+
+    let parameter3 = dataResult.data.map(data => data.option3),
+        parameter4 = dataResult.data.map(data => data.option4),
+        parameter5 = dataResult.data.map(data => data.option5),
+        parameter6 = dataResult.data.map(data => data.option6),
+        parameter7 = dataResult.data.map(data => data.option7),
+        parameter8 = dataResult.data.map(data => data.option8),
+        parameter9 = dataResult.data.map(data => data.option9),
+        removeFirstEl = [parameter3, parameter4, parameter5, parameter6, parameter7, parameter8, parameter9]
+            .map(data => data.splice(0, 1)),
+        removeLastEl = [parameter3, parameter4, parameter5, parameter6, parameter7, parameter8, parameter9]
+            .map(data => data.splice(20, 1)),
+        resultArray = [parameter3, parameter4, parameter5, parameter6, parameter7, parameter8, parameter9]
+
+    console.log(resultArray)
+})
