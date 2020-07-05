@@ -1,4 +1,4 @@
-
+ - HTML/CSS/JS calculator (papaparse + jquery) 
 
 - serverEmulation folder needed to emulate server with .csv file
 
