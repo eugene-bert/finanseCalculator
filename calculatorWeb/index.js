@@ -1,40 +1,90 @@
 //getInputsData
-function getBusinessTransactionsData() {
-    $('#businessTransactions').keyup(function() {
-        console.log($(this).val());
-    });
-}
-
-function getEmployeeNumber() {
-    $('#employeeNumber').keyup(function() {
-        console.log($(this).val());
-    });
-}
-
-function getTaxSystem() {
+function trackTaxSystem() {
     $('#taxSystem').change(function() {
+        //devCode
         console.log($(this).val());
     });
 }
 
-
-function getLegalEntity() {
+function trackLegalEntity() {
     $('#legalEntity').change(function() {
+        //devCode
         console.log($(this).val());
     });
 }
 
+function trackEmployeeNumber() {
+    $('#employeeNumber').keyup(function() {
+        //devCode
+        console.log($(this).val());
+    });
+}
 
-getBusinessTransactionsData()
+function trackBusinessTransactionsData() {
+    $('#businessTransactions').keyup(function() {
+        //devCode
+        console.log($(this).val());
+    });
+}
 
-getEmployeeNumber()
+//getAmountArray
+function getAmountArray() {
+    let inputData = [
+        $('#taxSystem').val(),
+        $('#legalEntity').val(),
+        $('#employeeNumber').val(),
+        $('#businessTransactions').val()
+    ]
 
-getTaxSystem()
+    return inputData
+}
 
-getLegalEntity()
+function getBusinessTransactionsAmount() {
+    switch (true) {
+        case getAmountArray()[3]<=5:
+            return 0
+        case getAmountArray()[3]<=10:
+            return 1
+        case getAmountArray()[3]<=15:
+            return 2
+        case getAmountArray()[3]<=20:
+            return 3
+        case getAmountArray()[3]<=25:
+            return 4
+        case getAmountArray()[3]<=30:
+            return 5
+        case getAmountArray()[3]<=35:
+            return 6
+        case getAmountArray()[3]<=40:
+            return 7
+        case getAmountArray()[3]<=45:
+            return 8
+        case getAmountArray()[3]<=50:
+            return 9
+        case getAmountArray()[3]<=55:
+            return 10
+        case getAmountArray()[3]<=60:
+            return 11
+        case getAmountArray()[3]<=65:
+            return 12
+        case getAmountArray()[3]<=70:
+            return 13
+        case getAmountArray()[3]<=75:
+            return 14
+        case getAmountArray()[3]<=80:
+            return 15
+        case getAmountArray()[3]<=85:
+            return 16
+        case getAmountArray()[3]<=90:
+            return 17
+        case getAmountArray()[3]<=95:
+            return 18
+        case getAmountArray()[3]<=100:
+            return 19
+    }
+}
 
 //transformCsvData
-
 $( document ).ajaxComplete(function(){
     console.log(dataResult)
 
@@ -53,3 +103,12 @@ $( document ).ajaxComplete(function(){
 
     console.log(resultArray)
 })
+
+
+//calcAmount
+function calcAmount() {
+    getAmountArray();
+
+}
+
+//dev-code
