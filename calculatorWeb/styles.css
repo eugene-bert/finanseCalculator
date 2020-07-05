@@ -1,7 +1,26 @@
-.page {
+/*loading styles*/
+.loading .calcBox-loading {
+    display: block;
+}
+.loading .calcBox-content {
+    display: none;
+}
+
+.loading .calcBox {
+    border: none;
+}
+
+.calcBox-loading {
+    display: none;
+    text-align: center;
+}
+
+/*main styles*/
+.calcBox-page {
     display: flex;
     justify-content: center;
 }
+
 
 .calcBox {
     padding: 50px;

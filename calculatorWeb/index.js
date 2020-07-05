@@ -1,4 +1,12 @@
+//loadingHandler
+
+// (function loadingHandler() {
+//     if (loading) return  $('.calcBox-page').addClass('loading')
+//     if (loading = false) return $('.calcBox-page').removeClass('loading')
+// })();
+
 //getInputsData
+
 function trackTaxSystem() {
     $('#taxSystem').change(function() {
         //devCode
@@ -27,88 +35,61 @@ function trackBusinessTransactionsData() {
     });
 }
 
+function getBusinessTransactionsAmount(el) {
+    switch (true) {
+        case el<=5:
+            return 0
+        case el<=10:
+            return 1
+        case el<=15:
+            return 2
+        case el<=20:
+            return 3
+        case el<=25:
+            return 4
+        case el<=30:
+            return 5
+        case el<=35:
+            return 6
+        case el<=40:
+            return 7
+        case el<=45:
+            return 8
+        case el<=50:
+            return 9
+        case el<=55:
+            return 10
+        case el<=60:
+            return 11
+        case el<=65:
+            return 12
+        case el<=70:
+            return 13
+        case el<=75:
+            return 14
+        case el<=80:
+            return 15
+        case el<=85:
+            return 16
+        case el<=90:
+            return 17
+        case el<=95:
+            return 18
+        case el<=100:
+            return 19
+        case el>100:
+            return 20
+    }
+}
+
 //getAmountArray
-function getAmountArray() {
+function getInputData() {
     let inputData = [
         $('#taxSystem').val(),
         $('#legalEntity').val(),
         $('#employeeNumber').val(),
-        $('#businessTransactions').val()
+        getBusinessTransactionsAmount($('#businessTransactions').val())
     ]
 
     return inputData
 }
-
-function getBusinessTransactionsAmount() {
-    switch (true) {
-        case getAmountArray()[3]<=5:
-            return 0
-        case getAmountArray()[3]<=10:
-            return 1
-        case getAmountArray()[3]<=15:
-            return 2
-        case getAmountArray()[3]<=20:
-            return 3
-        case getAmountArray()[3]<=25:
-            return 4
-        case getAmountArray()[3]<=30:
-            return 5
-        case getAmountArray()[3]<=35:
-            return 6
-        case getAmountArray()[3]<=40:
-            return 7
-        case getAmountArray()[3]<=45:
-            return 8
-        case getAmountArray()[3]<=50:
-            return 9
-        case getAmountArray()[3]<=55:
-            return 10
-        case getAmountArray()[3]<=60:
-            return 11
-        case getAmountArray()[3]<=65:
-            return 12
-        case getAmountArray()[3]<=70:
-            return 13
-        case getAmountArray()[3]<=75:
-            return 14
-        case getAmountArray()[3]<=80:
-            return 15
-        case getAmountArray()[3]<=85:
-            return 16
-        case getAmountArray()[3]<=90:
-            return 17
-        case getAmountArray()[3]<=95:
-            return 18
-        case getAmountArray()[3]<=100:
-            return 19
-    }
-}
-
-//transformCsvData
-$( document ).ajaxComplete(function(){
-    console.log(dataResult)
-
-    let parameter3 = dataResult.data.map(data => data.option3),
-        parameter4 = dataResult.data.map(data => data.option4),
-        parameter5 = dataResult.data.map(data => data.option5),
-        parameter6 = dataResult.data.map(data => data.option6),
-        parameter7 = dataResult.data.map(data => data.option7),
-        parameter8 = dataResult.data.map(data => data.option8),
-        parameter9 = dataResult.data.map(data => data.option9),
-        removeFirstEl = [parameter3, parameter4, parameter5, parameter6, parameter7, parameter8, parameter9]
-            .map(data => data.splice(0, 1)),
-        removeLastEl = [parameter3, parameter4, parameter5, parameter6, parameter7, parameter8, parameter9]
-            .map(data => data.splice(20, 1)),
-        resultArray = [parameter3, parameter4, parameter5, parameter6, parameter7, parameter8, parameter9]
-
-    console.log(resultArray)
-})
-
-
-//calcAmount
-function calcAmount() {
-    getAmountArray();
-
-}
-
-//dev-code
