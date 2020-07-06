@@ -1,11 +1,45 @@
-//loadingHandler
+function getData() {
+    return $.ajax({
+        url:"http://localhost:5000/financeCalculator",
+        dataType:"text",
+        type: 'GET',
+        async: false,
+        success:async function(data, xhr, status)
+        {
+            console.log({"Status": status.status, "Message": status.statusText})
+            $('.calcBox-page').removeClass('loading')
+        },
+        error:function(data) {
+            $('#notification-status').append(`<p>Something went wrong. Data is not available. 
+            Status: ${data.status} - ${data.statusText}</p>`)
+        }
+    }).responseText
+}
 
-// (function loadingHandler() {
-//     if (loading) return  $('.calcBox-page').addClass('loading')
-//     if (loading = false) return $('.calcBox-page').removeClass('loading')
-// })();
+function parseCsv(csv) {
+    return Papa.parse(csv,
+        {
+            header: true
+        }
+    );
+}
 
-//getInputsData
+function formatData(csvData){
+    let parameter3 = csvData.data.map(data => data.option3),
+        parameter4 = csvData.data.map(data => data.option4),
+        parameter5 = csvData.data.map(data => data.option5),
+        parameter6 = csvData.data.map(data => data.option6),
+        parameter7 = csvData.data.map(data => data.option7),
+        parameter8 = csvData.data.map(data => data.option8),
+        parameter9 = csvData.data.map(data => data.option9),
+        removeFirstEl = [parameter3, parameter4, parameter5, parameter6, parameter7, parameter8, parameter9]
+            .map(data => data.splice(0, 1)),
+        removeLastEl = [parameter3, parameter4, parameter5, parameter6, parameter7, parameter8, parameter9]
+            .map(data => data.splice(20, 1)),
+        resultArray = [parameter3, parameter4, parameter5, parameter6, parameter7, parameter8, parameter9]
+
+    return [resultArray, removeLastEl, removeFirstEl]
+}
 
 function trackTaxSystem() {
     $('#taxSystem').change(function() {
@@ -82,7 +116,6 @@ function getBusinessTransactionsAmount(el) {
     }
 }
 
-//getAmountArray
 function getInputData() {
     let inputData = [
         $('#taxSystem').val(),
@@ -93,3 +126,10 @@ function getInputData() {
 
     return inputData
 }
+
+let resultData = formatData(parseCsv(getData()))
+
+
+//devCode
+
+console.log(resultData)
