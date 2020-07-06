@@ -1,3 +1,4 @@
+//csv file parsing functions
 function getData() {
     return $.ajax({
         url:"http://localhost:5000/financeCalculator",
@@ -7,7 +8,6 @@ function getData() {
         success:async function(data, xhr, status)
         {
             console.log({"Status": status.status, "Message": status.statusText})
-            $('.calcBox-page').removeClass('loading')
         },
         error:function(data) {
             $('#notification-status').append(`<p>Something went wrong. Data is not available. 
@@ -16,31 +16,36 @@ function getData() {
     }).responseText
 }
 
-function parseCsv(csv) {
-    return Papa.parse(csv,
+function parseCsv(data) {
+    return Papa.parse(data,
         {
             header: true
         }
     );
 }
 
-function formatData(csvData){
-    let parameter3 = csvData.data.map(data => data.option3),
-        parameter4 = csvData.data.map(data => data.option4),
-        parameter5 = csvData.data.map(data => data.option5),
-        parameter6 = csvData.data.map(data => data.option6),
-        parameter7 = csvData.data.map(data => data.option7),
-        parameter8 = csvData.data.map(data => data.option8),
-        parameter9 = csvData.data.map(data => data.option9),
+function formatData(csv){
+    let parameter3 = csv.data.map(data => data.option3),
+        parameter4 = csv.data.map(data => data.option4),
+        parameter5 = csv.data.map(data => data.option5),
+        parameter6 = csv.data.map(data => data.option6),
+        parameter7 = csv.data.map(data => data.option7),
+        parameter8 = csv.data.map(data => data.option8),
+        parameter9 = csv.data.map(data => data.option9),
         removeFirstEl = [parameter3, parameter4, parameter5, parameter6, parameter7, parameter8, parameter9]
             .map(data => data.splice(0, 1)),
         removeLastEl = [parameter3, parameter4, parameter5, parameter6, parameter7, parameter8, parameter9]
             .map(data => data.splice(20, 1)),
         resultArray = [parameter3, parameter4, parameter5, parameter6, parameter7, parameter8, parameter9]
+        $('.calcBox-page').removeClass('loading')
 
-    return [resultArray, removeLastEl, removeFirstEl]
+    return [resultArray, removeLastEl]
 }
 
+//server data variable [regular amounts, amount per one thing]
+let resultData = formatData(parseCsv(getData()))
+
+//user action tracking functions
 function trackTaxSystem() {
     $('#taxSystem').change(function() {
         //devCode
@@ -69,6 +74,7 @@ function trackBusinessTransactionsData() {
     });
 }
 
+//BusinessTransactionsAmount handling function
 function getBusinessTransactionsAmount(el) {
     switch (true) {
         case el<=5:
@@ -116,6 +122,7 @@ function getBusinessTransactionsAmount(el) {
     }
 }
 
+//getInputData function
 function getInputData() {
     let inputData = [
         $('#taxSystem').val(),
@@ -127,9 +134,6 @@ function getInputData() {
     return inputData
 }
 
-let resultData = formatData(parseCsv(getData()))
-
 
 //devCode
-
 console.log(resultData)
