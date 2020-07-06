@@ -1,7 +1,7 @@
 //csv file parsing functions
 function getData() {
     return $.ajax({
-        url:"http://localhost:5000/financeCalculator",
+        url:"https://xn--80abaeqdocwye1bxez.su/csv/financeCalculator.csv",
         dataType:"text",
         type: 'GET',
         async: false,
@@ -40,38 +40,6 @@ function formatData(csv){
         $('.calcBox-page').removeClass('loading')
 
     return [resultArray, removeLastEl]
-}
-
-//server data variable [regular amounts, amount per one thing]
-let resultData = formatData(parseCsv(getData()))
-
-//user action tracking functions
-function trackTaxSystem() {
-    $('#taxSystem').change(function() {
-        //devCode
-        console.log($(this).val());
-    });
-}
-
-function trackLegalEntity() {
-    $('#legalEntity').change(function() {
-        //devCode
-        console.log($(this).val());
-    });
-}
-
-function trackEmployeeNumber() {
-    $('#employeeNumber').keyup(function() {
-        //devCode
-        console.log($(this).val());
-    });
-}
-
-function trackBusinessTransactionsData() {
-    $('#businessTransactions').keyup(function() {
-        //devCode
-        console.log($(this).val());
-    });
 }
 
 //BusinessTransactionsAmount handling function
@@ -125,15 +93,97 @@ function getBusinessTransactionsAmount(el) {
 //getInputData function
 function getInputData() {
     let inputData = [
-        $('#taxSystem').val(),
-        $('#legalEntity').val(),
-        $('#employeeNumber').val(),
+        Number($('#legalEntity').val()),
+        Number($('#taxSystem').val()),
+        Number($('#employeeNumber').val()),
         getBusinessTransactionsAmount($('#businessTransactions').val())
     ]
 
     return inputData
 }
 
+let resultData = formatData(parseCsv(getData()))
 
-//devCode
-console.log(resultData)
+function calculateResult() {
+    let dataFromInput = getInputData(),
+        before100 = resultData[0],
+        after100 = resultData[1]
+
+    function getArrayNumber() {
+        switch (true) {
+            case dataFromInput[1] === 4:
+                return 3
+            case dataFromInput[1] === 1:
+                let firstResult
+                if (dataFromInput[0] === 1) {
+                    firstResult = 6
+                } else if (dataFromInput[0] === 2) {
+                    firstResult = 0
+                }
+                return firstResult
+            case dataFromInput[1] === 2:
+                let secondResult
+                if (dataFromInput[0] === 1) {
+                    secondResult = 4
+                } else if (dataFromInput[0] === 2) {
+                    secondResult = 1
+                }
+                return secondResult
+            case dataFromInput[1] === 3:
+                let thirdResult
+                if (dataFromInput[0] === 1) {
+                    thirdResult = 5
+                } else if (dataFromInput[0] === 2) {
+                    thirdResult = 2
+                }
+                return thirdResult
+        }
+    }
+
+    function calcEmployeeNumber(n) {
+        return n > 1  ? (n - 1) * 500 : 0
+    }
+
+    let arrayNumber = getArrayNumber(),
+        amountArray = before100[arrayNumber],
+        buissnessTeansactionsCase = dataFromInput[3]
+
+    if (buissnessTeansactionsCase < 20 ) return Number(amountArray[buissnessTeansactionsCase].split(' ').join('')) + calcEmployeeNumber(dataFromInput[2])
+    if (buissnessTeansactionsCase === 20) {
+        let firstArg = Number(amountArray[19].split(' ').join('')) + calcEmployeeNumber(dataFromInput[2]),
+            transactionsArg = $('#businessTransactions').val(),
+            secondArg = after100[arrayNumber] * (transactionsArg - 100)
+        return firstArg + secondArg
+    }
+}
+
+
+//user action tracking functions
+function trackTaxSystem() {
+    $('#taxSystem').on('input', function() {
+        console.log(calculateResult())
+    });
+}
+
+function trackLegalEntity() {
+    $('#legalEntity').on('input', function() {
+        console.log(calculateResult())
+    });
+}
+
+function trackEmployeeNumber() {
+    $('#employeeNumber').on('input', function() {
+        console.log(calculateResult())
+    });
+}
+
+function trackBusinessTransactionsData() {
+    $('#businessTransactions').on('input', function() {
+        console.log(calculateResult())
+    });
+}
+
+trackTaxSystem()
+trackLegalEntity()
+trackEmployeeNumber()
+trackBusinessTransactionsData()
