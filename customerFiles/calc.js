@@ -166,6 +166,19 @@ function calculateResult() {
     }
 }
 
+function fillEmailInputs() {
+    let taxText = $('#taxSystem option:selected').text(),
+        entityText = $('#legalEntity option:selected').text(),
+        employeeNumber = $('#employeeNumber').val(),
+        businessTransactionsNumber = $('#businessTransactions').val()
+
+    $('#calc-result').val(calculateResult())
+    $('#calc-type').val(taxText)
+    $('#calc-system').val(entityText)
+    $('#calc-people').val(employeeNumber)
+    $('#calc-operations').val(businessTransactionsNumber)
+}
+
 function checkMaxEmloyeeNumber() {
     if ($('#employeeNumber').val() > 100 ) {
         $('#employeeNumber').val(100)
@@ -175,16 +188,18 @@ function checkMaxEmloyeeNumber() {
     }
 }
 
+
 function trackInputChanges() {
     $(document).on('input', function() {
         checkMaxEmloyeeNumber()
         $('#calcBox-sum').text(`Сумма: ${calculateResult()}`)
+        fillEmailInputs()
     });
 }
 
 //initialize calculator
+fillEmailInputs()
 $('#calcBox-sum').text(`Сумма: ${calculateResult()}`)
 
 //track changes
 trackInputChanges()
-

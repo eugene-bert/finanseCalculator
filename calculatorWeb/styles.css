@@ -33,3 +33,14 @@
 .calcBox-inputs__businessTransactions {
     padding: 10px 0;
 }
+
+.calcBox-result {
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.valueNotification {
+    color: #fc3d03;
+    padding: 0;
+    margin: 0;
+}
