@@ -1,7 +1,7 @@
 //csv file parsing functions
 function getData() {
     return $.ajax({
-        url:"https://xn--80abaeqdocwye1bxez.su/csv/financeCalculator.csv",
+        url:"http://localhost:5000/financeCalculator",
         dataType:"text",
         type: 'GET',
         async: false,
@@ -149,7 +149,7 @@ function calculateResult() {
     }
 
     function checkIfQuarter() {
-        return getArrayNumber() === 6 ? '/квартал' : '/месяц'
+        return getArrayNumber() === 6 ? '/quarter' : '/month'
     }
 
     let arrayNumber = getArrayNumber(),
@@ -157,19 +157,19 @@ function calculateResult() {
         buissnessTeansactionsCase = dataFromInput[3],
         quarterText = checkIfQuarter()
 
-    if (buissnessTeansactionsCase < 20 ) return `${Number(amountArray[buissnessTeansactionsCase].split(' ').join('')) + calcEmployeeNumber(dataFromInput[2])}  руб. ${quarterText}`
+    if (buissnessTeansactionsCase < 20 ) return `${Number(amountArray[buissnessTeansactionsCase].split(' ').join('')) + calcEmployeeNumber(dataFromInput[2])}  rub. ${quarterText}`
     if (buissnessTeansactionsCase === 20) {
         let firstArg = Number(amountArray[19].split(' ').join('')) + calcEmployeeNumber(dataFromInput[2]),
             transactionsArg = $('#businessTransactions').val(),
             secondArg = after100[arrayNumber] * (transactionsArg - 100)
-        return `${firstArg} + ${secondArg} руб. ${quarterText}`
+        return `${firstArg} + ${secondArg} rub. ${quarterText}`
     }
 }
 
 function checkMaxEmloyeeNumber() {
     if ($('#employeeNumber').val() > 100 ) {
         $('#employeeNumber').val(100)
-        $('.valueNotification').text('Максимальное число сотрудников 100')
+        $('.valueNotification').text('Maximum number of employees 100')
     } else {
         $('.valueNotification').text('')
     }
@@ -178,12 +178,12 @@ function checkMaxEmloyeeNumber() {
 function trackInputChanges() {
     $(document).on('input', function() {
         checkMaxEmloyeeNumber()
-        $('#calcBox-sum').text(`Сумма: ${calculateResult()}`)
+        $('#calcBox-sum').text(`Amount: ${calculateResult()}`)
     });
 }
 
 //initialize calculator
-$('#calcBox-sum').text(`Сумма: ${calculateResult()}`)
+$('#calcBox-sum').text(`Amount: ${calculateResult()}`)
 
 //track changes
 trackInputChanges()

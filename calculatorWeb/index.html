@@ -22,21 +22,20 @@
         </div>
         <div class="calcBox-content">
             <div class="calcBox-header">
-          <h3>Калькулятор стоимости бухгалтерских услуг</h3>
-          <p>Рассчитать стоимость услуг</p>
+          <h3>Accounting Fees Calculator</h3>
         </div>
             <div class="calcBox-main">
           <div class="calcBox-inputs">
               <div class="calcBox-inputs__legalEntity">
-                <label for="legalEntity">Форма юридического лица</label>
+                <label for="legalEntity">Legal entity form</label>
 
                 <select name="legalEntity" id="legalEntity">
-                  <option value="1">ИП без сотрудников</option>
-                  <option value="2">ООО с 1 сотрудником</option>
+                  <option value="1">IE without employees</option>
+                  <option value="2">LLC with 1 employee</option>
                 </select>
               </div>
               <div class="calcBox-inputs__taxSystem">
-                <label for="taxSystem">Cистема налогообложения</label>
+                <label for="taxSystem">Tax system</label>
 
                 <select name="taxSystem" id="taxSystem">
                   <option value="1">ЕНВД</option>
@@ -46,17 +45,17 @@
                 </select>
               </div>
               <div class="calcBox-inputs__employeeNumber">
-                  <label for="employeeNumber">Количество сотрудников (не считая ИП и директора)</label>
+                  <label for="employeeNumber">Number of employees (excluding individual entrepreneurs and directors)</label>
                   <input value="1" type="number" id="employeeNumber" name="employeeNumber" min="1" max="100">
                   <p class="valueNotification"></p>
               </div>
               <div class="calcBox-inputs__businessTransactions">
-                  <label for="businessTransactions">Количество хозяйственных операций (акты и накладные входящие, исходящие)</label>
+                  <label for="businessTransactions">The number of business transactions (acts and invoices, incoming, outgoing)</label>
                   <input value="0" type="number" id="businessTransactions" name="businessTransactions">
               </div>
           </div>
           <div class="calcBox-result">
-              <div id="calcBox-sum">Сумма:  </div>
+              <div id="calcBox-sum">Amount:  </div>
           </div>
         </div>
         </div>

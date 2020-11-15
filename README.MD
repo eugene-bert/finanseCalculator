@@ -1,10 +1,17 @@
+## Accounting Fees Calculator for RF country.
+ 
  - HTML/CSS/JS calculator (papaparse + jquery) 
 
 - serverEmulation folder needed to emulate server with .csv file
 
-- calculatorWeb - web calculator application
+## Run serverEmulation
+```
+$ cd serverEmulation
+$ npm install
+$ npm run server
+```
 
-- .csv file directory (serverEmulation/cdn/financeCalculator.csv)
+> .csv file directory (serverEmulation/cdn/financeCalculator.csv)
    ! - Please be informed: option1,option2 ... optionN needed to parse .csv file
 
-- calculatorWeb/data.js => 5: url with link to server file
+- calculatorWeb/index.js => :4: url with link to server file
